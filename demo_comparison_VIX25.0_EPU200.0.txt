@@ -1,0 +1,21 @@
+Input: VIX=25.0  EPU=200.0
+V1 bucket: [VIX_HIGH] [EPU_HIGH]
+V2 bucket: [VIX_VERY_HIGH] [EPU_HIGH]
+
+======================================================================
+V1 OUTPUT
+======================================================================
+  [Topic 0] https://www. washingtonexaminer.com/opinion /hunter-biden-trump-wins-primary-michigan-by-10-points/2024/12/26/hunter-bidens-latest-promises-were-bashing-and-unfair-to-trump/article_1d4c78f-5ae5-
+  [Topic 1] This is what America is all about. https://t.co/HVlSzpT4XU https://twitter.com/realDonaldTrump/status/12186680989835981 … pic.twitter.twitter iaE2kS4Q4XSj.twitter… pic iaHk5dWQI7oG—@
+  [Topic 2] https://www. DonaldJTrump.com/news/2024/ 09/cnn-poll-trump-has-the-gutsy-line-as-gop-primary-primary/ … pic.twitter.com /jZbXDvvLsTQr – via @BreitbartNews. Thank you! https://twitter.co/B
+  [Topic 3] [QuickTime Video] https://www. youtube.com/live/aJUxDQg2W4I?s i=OiRQcFpR_I9g0Oo4y5Wl0w7NlqWQ_n7SjWYZV-Rv2IyXKF5Zy0
+
+======================================================================
+V2 OUTPUT
+======================================================================
+  [Fake News & Witch Hunt]  FoxNews has just apologized to me for the terrible reporting they have done of the recent Witch Hunt. That’s because they don’t want to be wrong, they don't want to give the facts, and they are very concerned that the President is going to go to hell. They have lost control of their news cycle! The people who wrote those horrible stories, and the lies they
+  [Crooked Democrats]  ....and so many others. It’s the most corrupt administration in the history of our country. No wonder so many of the great people in charge have lost their minds. The Democrats will never win in 2020, but that’ll change, and we’ve got them all! #MAGA … #TrumpForce2020 … https:// rumble.com/v5twu
+  [America First]  Congratulations to the U.S. Army for being the first country to host the 2024 G-7 in Japan! #UNGA2024 …@foxandfriends @foxandt @foxbutts @FoxNews …Great things will happen! …And congratulations to President Xi, who just won the G-6 War…Thank you! …@starbucks_in_uk @Rasm
+  [MAGA Endorsements]  Congressman Doug Schoen is an America First Patriot who is doing an incredible job representing the incredible people of Ohio’s 6th Congressional District.\n \nAs Chairman of the House Administration Committee, Doug is working tirelessly to Grow our Economy, Cut Taxes and Regulations, Advance American Energy DOMINANCE, Promote MADE IN THE U.S.A., Advance American Agriculture, Uph
+  [Make America Great Again]  It is my great honor to announce that @SenateGOP will be launching the American Innovation Agenda this September, a four-year plan for transforming America’s advanced manufacturing base into the envy of the world. #AGENDA2020 …. America‚s manufacturing base is in the top five, and it is doing just fine. JOBS, JOBS!!! I will not rest until American
+  [Rallies & Events]  “TRUMP HATES BIDEN’S CLINTON’s CENSORSHIP”\n https:// thehill.com/politics/2023/05 /05/trump-hates-biden-s-clinton-censor-came-into-his-face/2025/07/05/16/id/183839/
