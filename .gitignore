@@ -1,0 +1,15 @@
+# Large data files
+*.csv
+*.npy
+
+# Model weights (too large for GitHub — download from Drive)
+booth_results/
+
+# System
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+
+# Claude memory
+.claude/
