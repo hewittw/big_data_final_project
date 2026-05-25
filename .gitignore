@@ -2,14 +2,22 @@
 *.csv
 *.npy
 
-# Model weights (too large for GitHub — download from Drive)
+# Model weights and training artifacts
 booth_results/
+booth_results_v2/
+booth_results_combined/
 
-# System
-.DS_Store
+# Downloaded Drive zips
+booth_results-*.zip
+
+# Python
 __pycache__/
 *.pyc
 *.pyo
+*.pth
+*.pt
+*.bin
 
-# Claude memory
+# System
+.DS_Store
 .claude/

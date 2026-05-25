@@ -1,40 +1,39 @@
-import os, json, math, webbrowser, threading
+import os, json, math
 import torch
 from flask import Flask, request, jsonify, render_template
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
+from huggingface_hub import hf_hub_download
 
 app = Flask(__name__)
 
-BASE        = os.path.dirname(os.path.abspath(__file__))
-RESULTS_DIR = os.path.join(BASE, 'booth_results')
-MODEL_DIR   = os.path.join(RESULTS_DIR, 'models', 'trump_gpt2')
-CUTOFFS_PATH = os.path.join(RESULTS_DIR, 'results', 'bucket_cutoffs.json')
+HF_MODEL_ID = "hewittw/trump-gpt2"
 
-# ── Load model ──────────────────────────────────────────────────────────────
-print("Loading tokenizer and model from booth_results/models/trump_gpt2/ ...")
-# Load base GPT-2 tokenizer and re-add special tokens (avoids tokenizers version mismatch)
+# ── Load tokenizer from base GPT-2 + special tokens from HF Hub ─────────────
+print("Loading tokenizer...")
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-with open(os.path.join(MODEL_DIR, 'tokenizer_config.json')) as f:
-    _tcfg = json.load(f)
-_special = _tcfg.get('extra_special_tokens', [])
-tokenizer.add_special_tokens({'additional_special_tokens': _special})
+
+tcfg_path = hf_hub_download(repo_id=HF_MODEL_ID, filename="tokenizer_config.json")
+with open(tcfg_path) as f:
+    tcfg = json.load(f)
+special_tokens = tcfg.get('extra_special_tokens', [])
+tokenizer.add_special_tokens({'additional_special_tokens': special_tokens})
 tokenizer.pad_token = tokenizer.eos_token
-model     = GPT2LMHeadModel.from_pretrained(MODEL_DIR)
+
+# ── Load model from HF Hub ───────────────────────────────────────────────────
+print("Loading model...")
+model = GPT2LMHeadModel.from_pretrained(HF_MODEL_ID)
 model.eval()
 
-device = torch.device(
-    'cuda'  if torch.cuda.is_available() else
-    'mps'   if torch.backends.mps.is_available() else
-    'cpu'
-)
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model.to(device)
 print(f"Model loaded on {device}")
 
-# ── Load bucket cutoffs ──────────────────────────────────────────────────────
-with open(CUTOFFS_PATH) as f:
+# ── Load bucket cutoffs from HF Hub ─────────────────────────────────────────
+cutoffs_path = hf_hub_download(repo_id=HF_MODEL_ID, filename="bucket_cutoffs.json")
+with open(cutoffs_path) as f:
     cutoffs = json.load(f)
 
-# ── Detect topics from tokenizer special tokens ──────────────────────────────
+# ── Detect topics from special tokens ───────────────────────────────────────
 topics = sorted([
     int(t.replace('[TOPIC_', '').replace(']', ''))
     for t in tokenizer.additional_special_tokens
@@ -56,8 +55,8 @@ def bucket_epu(e):
 # ── Generation ───────────────────────────────────────────────────────────────
 def generate_for_topic(vix_label, epu_label, topic_id,
                        max_new_tokens=90, temperature=0.85, top_p=0.92):
-    prompt     = f"[{vix_label}] [{epu_label}] [TOPIC_{topic_id}]"
-    input_ids  = tokenizer.encode(prompt, return_tensors='pt').to(device)
+    prompt    = f"[{vix_label}] [{epu_label}] [TOPIC_{topic_id}]"
+    input_ids = tokenizer.encode(prompt, return_tensors='pt').to(device)
     prompt_len = input_ids.shape[1]
     with torch.no_grad():
         output = model.generate(
@@ -112,10 +111,6 @@ def generate():
         'tweets':    tweets,
     })
 
-# ── Launch ───────────────────────────────────────────────────────────────────
+# ── Launch (HF Spaces uses port 7860) ───────────────────────────────────────
 if __name__ == '__main__':
-    def open_browser():
-        webbrowser.open('http://localhost:5001')
-    threading.Timer(1.5, open_browser).start()
-    print("Starting server at http://localhost:5001")
-    app.run(debug=False, port=5001)
+    app.run(host='0.0.0.0', port=7860)

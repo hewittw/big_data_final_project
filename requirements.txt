@@ -1,0 +1,5 @@
+flask
+transformers==4.40.0
+torch
+huggingface_hub
+safetensors
